@@ -2,10 +2,10 @@
   "name": "cosmofeed",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/main.js",
+  "main": "dist/server.js",
   "scripts": {
-    "start": "node dist/main.js",
-    "dev": "nodemon src/main.ts",
+    "start": "node dist/server.js",
+    "dev": "nodemon src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --ext .ts"
   },
