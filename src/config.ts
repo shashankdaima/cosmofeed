@@ -10,5 +10,5 @@ export const config = {
   google_client_secret:process.env.GOOGLE_CLIENT_SECRET,
   google_redirect_uri:process.env.GOOGLE_REDIRECT_URL,
   google_refresh_token:process.env.GOOGLE_REFRESH_TOKEN,
-
+  mqtt_uri:"mqtt://localhost:1883"
 };

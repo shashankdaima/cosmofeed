@@ -5,6 +5,7 @@ import { SmsNotificationDispatcherImplementation } from "../services/notificatio
 import { Result, Success } from "../utils/result.util";
 import { SlackNotificationDispatcherImplementation } from "../services/slack_notification_dispatcher_impl.service";
 import { EmailNotificationDispatcherImplementation } from "../services/email_notification_dispatcher_impl.service";
+import { MqttNotificationDispatcherImplementation } from "../services/mqtt_notification_dispatcher_impl.service";
 export const dispatchNotification: RequestHandler = async (req, res, next) => {
     try {
         let notificationChannel;
@@ -26,7 +27,9 @@ export const dispatchNotification: RequestHandler = async (req, res, next) => {
                 result = await notificationDispatcher.dispatch(notificationChannel, notification);
                 break;
             case 'MQTT':
+                const mqttNotificationDispatcher = new MqttNotificationDispatcherImplementation();
                 notificationChannel = new MQTTChannel(notificationChannelData.topic, notificationChannelData.message);
+                result = await mqttNotificationDispatcher.dispatch(notificationChannel, notification);
                 break;
             case 'slack':
                 const slackNotificationDispatcher = new SlackNotificationDispatcherImplementation();
