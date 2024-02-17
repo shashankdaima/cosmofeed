@@ -1,11 +1,14 @@
- 
-interface Notification {
-  id: number;
+import { v4 as uuidv4 } from 'uuid';
+
+export class Notification {
+  id: string;
   message: string;
-  status: string;
   createdAt: Date;
-  updatedAt: Date;
+
+  constructor(message: string) {
+    this.id = uuidv4();
+    this.message = message;
+    this.createdAt = new Date();
+  }
 }
 
-
-export { Notification };

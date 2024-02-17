@@ -13,3 +13,4 @@ class MyError<T> extends Result<T> {
         super(null, error);
     }
 }
+export {Result, Success, MyError};

@@ -1,8 +1,5 @@
 import express from 'express';
-import { helloRouter } from './hello.route';
-import { todoRouter } from './todo.route';
+import { notificationRouter } from './notification.route';
 const router = express.Router();
-
-router.use('/hello', helloRouter);
-router.use('/todo', todoRouter);
+router.use("/notification",notificationRouter);
 export { router as routes };

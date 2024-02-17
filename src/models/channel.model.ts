@@ -1,5 +1,7 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export class BaseChannel {
-    id: string = '';
+    id: string = uuidv4();
     type: 'email' | 'push' | 'SMS' | 'MQTT' | 'Slack' | '*' = '*';
 }
 
@@ -17,11 +19,17 @@ export class PushChannel extends BaseChannel {
 }
 
 export class SMSChannel extends BaseChannel {
-    recipients: string[] = [];
-    message: string = '';
-    type: 'SMS' = 'SMS';
-}
+    recipients: string[];
+    message: string;
+    type: 'SMS';
 
+    constructor(recipients: string[], message: string) {
+        super();
+        this.recipients = recipients;
+        this.message = message;
+        this.type = 'SMS';
+    }
+}
 export class MQTTChannel extends BaseChannel {
     topic: string = '';
     message: string = '';
@@ -37,11 +45,19 @@ export class SlackChannel extends BaseChannel {
 // 
 export class AllChannel extends BaseChannel {
     type: '*'='*';
-    emailChannel: EmailChannel = new EmailChannel();
-    pushChannel: PushChannel = new PushChannel();
-    smsChannel: SMSChannel = new SMSChannel();
-    mqttChannel: MQTTChannel = new MQTTChannel();
-    slackChannel: SlackChannel = new SlackChannel();
-}
+    emailChannel: EmailChannel;
+    pushChannel: PushChannel;
+    smsChannel: SMSChannel;
+    mqttChannel: MQTTChannel;
+    slackChannel: SlackChannel;
 
+    constructor(email:EmailChannel,push:PushChannel, sms:SMSChannel, mqtt:MQTTChannel, slack:SlackChannel) {
+        super();
+        this.emailChannel =email;
+        this.pushChannel = push;
+        this.smsChannel = sms;
+        this.mqttChannel = mqtt;
+        this.slackChannel = slack;
+    }
+}
 
