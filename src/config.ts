@@ -4,5 +4,6 @@ export const config = {
   port: process.env.PORT || 5000,
   twilio_auth_token:process.env.TWILIO_AUTH_TOKEN, 
   twilio_sid_number:process.env.TWILIO_SID_NUMBER,
-  twilio_phone_number:'+12137726943'
+  twilio_phone_number:'+12137726943',
+  slack_auth_token:process.env.SLACK_AUTH_TOKEN
 };

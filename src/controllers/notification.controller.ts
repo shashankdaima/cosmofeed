@@ -3,10 +3,11 @@ import { EmailChannel, MQTTChannel, PushChannel, SMSChannel, SlackChannel } from
 import { Notification } from "../models/notification.model";
 import { SmsNotificationDispatcherImplementation } from "../services/notification_dispatcher.service";
 import { Result, Success } from "../utils/result.util";
+import { SlackNotificationDispatcherImplementation } from "../services/slack_notification_dispatcher_impl.service";
 export const dispatchNotification: RequestHandler = async (req, res, next) => {
     try {
         let notificationChannel;
-        const notification = new Notification('Your message here');
+        const notification = new Notification('Shashank Daima');
         const notificationChannelData = req.body;
         let result: Result<Boolean> | undefined = undefined;
         switch (notificationChannelData.type) {
@@ -24,8 +25,10 @@ export const dispatchNotification: RequestHandler = async (req, res, next) => {
             case 'MQTT':
                 notificationChannel = new MQTTChannel(notificationChannelData.topic, notificationChannelData.message);
                 break;
-            case 'Slack':
+            case 'slack':
+                const slackNotificationDispatcher = new SlackNotificationDispatcherImplementation();
                 notificationChannel = new SlackChannel(notificationChannelData.channel, notificationChannelData.message);
+                result = await slackNotificationDispatcher.dispatch(notificationChannel, notification);
                 break;
             default:
                 throw new Error('Invalid notification channel type');
