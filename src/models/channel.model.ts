@@ -10,12 +10,28 @@ export class EmailChannel extends BaseChannel {
     subject: string = '';
     body: string = '';
     type: 'email' = 'email';
+
+    constructor(recipients: string[], subject: string, body: string) {
+        super();
+        this.recipients = recipients;
+        this.subject = subject;
+        this.body = body;
+        this.type = 'email';
+    }
 }
 export class PushChannel extends BaseChannel {
     recipients: string[] = [];
     title: string = '';
     body: string = '';
     type: 'push' = 'push';
+
+    constructor(recipients: string[], title: string, body: string) {
+        super();
+        this.recipients = recipients;
+        this.title = title;
+        this.body = body;
+        this.type = 'push';
+    }
 }
 
 export class SMSChannel extends BaseChannel {
@@ -34,12 +50,26 @@ export class MQTTChannel extends BaseChannel {
     topic: string = '';
     message: string = '';
     type: 'MQTT' = 'MQTT';
+
+    constructor(topic: string, message: string) {
+        super();
+        this.topic = topic;
+        this.message = message;
+        this.type = 'MQTT';
+    }
 }
 
 export class SlackChannel extends BaseChannel {
     channel: string = '';
     message: string = '';
     type: 'Slack' = 'Slack';
+
+    constructor(channel: string, message: string) {
+        super();
+        this.channel = channel;
+        this.message = message;
+        this.type = 'Slack';
+    }
 }
 
 // 
@@ -60,4 +90,3 @@ export class AllChannel extends BaseChannel {
         this.slackChannel = slack;
     }
 }
-

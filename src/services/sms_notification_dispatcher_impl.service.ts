@@ -12,7 +12,6 @@ export class SmsNotificationDispatcherImplementation implements NotificationDisp
         const client = twilio(accountSid, authToken);
 
         let results: boolean[] = [];
-
         for (let recipient of notificationChannel.recipients) {
             try {
                 await client.messages.create({
@@ -20,6 +19,7 @@ export class SmsNotificationDispatcherImplementation implements NotificationDisp
                     from: config.twilio_phone_number,
                     to: recipient
                 });
+               
                 results.push(true);
             } catch (error) {
                 console.log(error);
