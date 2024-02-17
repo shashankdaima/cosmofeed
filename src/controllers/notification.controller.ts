@@ -4,6 +4,7 @@ import { Notification } from "../models/notification.model";
 import { SmsNotificationDispatcherImplementation } from "../services/notification_dispatcher.service";
 import { Result, Success } from "../utils/result.util";
 import { SlackNotificationDispatcherImplementation } from "../services/slack_notification_dispatcher_impl.service";
+import { EmailNotificationDispatcherImplementation } from "../services/email_notification_dispatcher_impl.service";
 export const dispatchNotification: RequestHandler = async (req, res, next) => {
     try {
         let notificationChannel;
@@ -12,7 +13,9 @@ export const dispatchNotification: RequestHandler = async (req, res, next) => {
         let result: Result<Boolean> | undefined = undefined;
         switch (notificationChannelData.type) {
             case 'email':
-                notificationChannel = new EmailChannel(notificationChannelData.recipients, notificationChannelData.subject, notificationChannelData.body);
+                const emailNotificationDispatcher=new EmailNotificationDispatcherImplementation();
+                notificationChannel=new EmailChannel(notificationChannelData.recipients,notificationChannelData.subject, notificationChannelData.body);
+                result=await emailNotificationDispatcher.dispatch(notificationChannel, notification);
                 break;
             case 'push':
                 notificationChannel = new PushChannel(notificationChannelData.recipients, notificationChannelData.title, notificationChannelData.body);
