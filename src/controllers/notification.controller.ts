@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { EmailChannel, MQTTChannel, PushChannel, SMSChannel, SlackChannel } from "../models/channel.model";
+import { AllChannel, EmailChannel, MQTTChannel, PushChannel, SMSChannel, SlackChannel } from "../models/channel.model";
 import { Notification } from "../models/notification.model";
 import { SmsNotificationDispatcherImplementation } from "../services/notification_dispatcher.service";
 import { Result, Success } from "../utils/result.util";
@@ -7,6 +7,7 @@ import { SlackNotificationDispatcherImplementation } from "../services/slack_not
 import { EmailNotificationDispatcherImplementation } from "../services/email_notification_dispatcher_impl.service";
 import { MqttNotificationDispatcherImplementation } from "../services/mqtt_notification_dispatcher_impl.service";
 import { PushNotificationDispatcherImplementation } from "../services/push_notification_dispatcher_impl.service";
+import { NotificationDispatcherImplementation } from "../services/all_notification_dispatcher_impl.service";
 export const dispatchNotification: RequestHandler = async (req, res, next) => {
     try {
         let notificationChannel;
@@ -15,9 +16,9 @@ export const dispatchNotification: RequestHandler = async (req, res, next) => {
         let result: Result<Boolean> | undefined = undefined;
         switch (notificationChannelData.type) {
             case 'email':
-                const emailNotificationDispatcher=new EmailNotificationDispatcherImplementation();
-                notificationChannel=new EmailChannel(notificationChannelData.recipients,notificationChannelData.subject, notificationChannelData.body);
-                result=await emailNotificationDispatcher.dispatch(notificationChannel, notification);
+                const emailNotificationDispatcher = new EmailNotificationDispatcherImplementation();
+                notificationChannel = new EmailChannel(notificationChannelData.recipients, notificationChannelData.subject, notificationChannelData.body);
+                result = await emailNotificationDispatcher.dispatch(notificationChannel, notification);
                 break;
             case 'push':
                 const pushNotificationDispatcher = new PushNotificationDispatcherImplementation();
@@ -26,7 +27,7 @@ export const dispatchNotification: RequestHandler = async (req, res, next) => {
                 break;
             case 'SMS':
                 const notificationDispatcher = new SmsNotificationDispatcherImplementation();
-                notificationChannel = new SMSChannel( notificationChannelData.recipients, notificationChannelData.message);
+                notificationChannel = new SMSChannel(notificationChannelData.recipients, notificationChannelData.message);
                 result = await notificationDispatcher.dispatch(notificationChannel, notification);
                 break;
             case 'MQTT':
@@ -39,10 +40,21 @@ export const dispatchNotification: RequestHandler = async (req, res, next) => {
                 notificationChannel = new SlackChannel(notificationChannelData.channel, notificationChannelData.message);
                 result = await slackNotificationDispatcher.dispatch(notificationChannel, notification);
                 break;
+            case '*':
+                const allNotificationDispatcher = new NotificationDispatcherImplementation();
+                notificationChannel = new AllChannel(
+                    notificationChannelData.emailChannel,
+                    notificationChannelData.pushChannel,
+                    notificationChannelData.smsChannel,
+                    notificationChannelData.mqttChannel,
+                    notificationChannelData.slackChannel
+                );
+                result = await allNotificationDispatcher.dispatch(notificationChannel, notification);
+                break;
             default:
                 throw new Error('Invalid notification channel type');
         }
-        
+
         if (result != undefined && result instanceof Success && result.data) {
             res.status(200).json({ message: 'Notification dispatched successfully' });
         } else {
