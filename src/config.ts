@@ -10,5 +10,7 @@ export const config = {
   google_client_secret:process.env.GOOGLE_CLIENT_SECRET,
   google_redirect_uri:process.env.GOOGLE_REDIRECT_URL,
   google_refresh_token:process.env.GOOGLE_REFRESH_TOKEN,
-  mqtt_uri:"mqtt://localhost:1883"
+  mqtt_uri:"mqtt://localhost:1883",
+  google_credentials_path:process.env.GOOGLE_SERVICE_PATH, 
+  firebase_project_id:'cosmofeed-86cf0',
 };

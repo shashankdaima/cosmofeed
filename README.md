@@ -1,5 +1,5 @@
 TODO:
-1. FCM 
+1. (Done)FCM 
 2. ALL at once
 3. Queue
 4. Postgres updator
