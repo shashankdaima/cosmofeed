@@ -13,4 +13,5 @@ export const config = {
   mqtt_uri:"mqtt://localhost:1883",
   google_credentials_path:process.env.GOOGLE_SERVICE_PATH, 
   firebase_project_id:'cosmofeed-86cf0',
+  google_email_host:process.env.GOOGLE_EMAIL_HOST
 };

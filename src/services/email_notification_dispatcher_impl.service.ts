@@ -25,7 +25,7 @@ export class EmailNotificationDispatcherImplementation implements NotificationDi
                 service: 'Gmail',
                 auth: {
                     type: 'OAuth2',
-                    user: 'daimashashank10@gmail.com',
+                    user: config.google_email_host,
                     clientId: CLIENT_ID,
                     clientSecret: CLIENT_SECRET,
                     refreshToken: REFRESH_TOKEN,
@@ -33,7 +33,7 @@ export class EmailNotificationDispatcherImplementation implements NotificationDi
                 },
             });
             const mailOptions = {
-                from: 'daimashashank10@gmail.com',
+                from: config.google_email_host,
                 subject: notificationChannel.subject,
                 text: notificationChannel.body,
                 to:""
