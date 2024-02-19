@@ -1,10 +1,10 @@
-import { BaseChannel, EmailChannel } from "../models/channel.model";
-import { Notification } from "../models/notification.model";
+import { BaseChannel, EmailChannel } from "../../models/channel.model";
+import { Notification } from "../../models/notification.model";
 import { NotificationDispatcherService } from "./notification_dispatcher.service";
-import { Result, Success,MyError } from "../utils/result.util";
+import { Result, Success,MyError } from "../../utils/result.util";
 import { google } from 'googleapis';
 import nodemailer from 'nodemailer';
-import { config } from '../config';
+import { config } from '../../config';
 
 const CLIENT_ID = config.google_client_id;
 const CLIENT_SECRET = config.google_client_secret;

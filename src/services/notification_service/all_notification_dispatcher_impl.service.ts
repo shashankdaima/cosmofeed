@@ -1,7 +1,7 @@
-import { AllChannel, BaseChannel } from "../models/channel.model";
-import { Notification } from "../models/notification.model";
+import { AllChannel, BaseChannel } from "../../models/channel.model";
+import { Notification } from "../../models/notification.model";
 import { NotificationDispatcherService, SmsNotificationDispatcherImplementation } from "./notification_dispatcher.service";
-import { Result, MyError, Success } from "../utils/result.util";
+import { Result, MyError, Success } from "../../utils/result.util";
 import { EmailNotificationDispatcherImplementation } from "./email_notification_dispatcher_impl.service";
 import { MqttNotificationDispatcherImplementation } from "./mqtt_notification_dispatcher_impl.service";
 import { PushNotificationDispatcherImplementation } from "./push_notification_dispatcher_impl.service";

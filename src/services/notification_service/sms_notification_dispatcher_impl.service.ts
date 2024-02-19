@@ -1,9 +1,9 @@
-import { BaseChannel, SMSChannel } from "../models/channel.model";
-import { Notification } from "../models/notification.model";
+import { BaseChannel, SMSChannel } from "../../models/channel.model";
+import { Notification } from "../../models/notification.model";
 import { NotificationDispatcherService } from "./notification_dispatcher.service";
-import { config } from "../config";
+import { config } from "../../config";
 import twilio from 'twilio';
-import { MyError, Result, Success } from "../utils/result.util";
+import { MyError, Result, Success } from "../../utils/result.util";
 
 export class SmsNotificationDispatcherImplementation implements NotificationDispatcherService {
     async dispatch(notificationChannel: SMSChannel, notification: Notification): Promise<Result<Boolean>> {
