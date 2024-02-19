@@ -7,7 +7,7 @@ import { initializeApp } from 'firebase-admin/app';
 import {credential} from "firebase-admin";
 
 // const serviceAccount = require('/path/to/serviceAccountKey.json');
-const firebaseApp = initializeApp({
+initializeApp({
     credential: credential.cert(config.google_credentials_path!),
     projectId: config.firebase_project_id,
 });
