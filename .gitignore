@@ -3,4 +3,3 @@ dist
 package-lock.json
 *.env
 .env
-google-services.json
