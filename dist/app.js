@@ -12,7 +12,7 @@ const errorHandlerMiddleware_1 = __importDefault(require("./middlewares/errorHan
 const app_1 = require("firebase-admin/app");
 const firebase_admin_1 = require("firebase-admin");
 // const serviceAccount = require('/path/to/serviceAccountKey.json');
-const firebaseApp = (0, app_1.initializeApp)({
+(0, app_1.initializeApp)({
     credential: firebase_admin_1.credential.cert(config_1.config.google_credentials_path),
     projectId: config_1.config.firebase_project_id,
 });
