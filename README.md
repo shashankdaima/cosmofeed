@@ -1,4 +1,4 @@
-# Scalable MultiChannel Notification System
+# MultiChannel Notification System
 
 
 This is a scalable MultiChannel Notification System that sends notifications to SMS, EMail, Push Notification, Slack, and MQTT. This is a hiring assignment for a Senior Software Engineer at Cosmofeed. The system is built with Express.js and TypeScript.
@@ -75,6 +75,39 @@ Because most of the platform have some sort of authentication, it's a important 
 - Phone number nothing. It will work. 
 - MQTT not working as of now. 
 
+## How to monitor each individual notification progress?
+![Notification Status](media/supabase_queries.png)
+We are storing each statuses of each notification separately in a Postgres database(currently hosted on supabase servers). We can query this db with following query. (or could use ORMs like Prisma for quering. I choose to stick with writing raw SQL queries.)
+```sql
+SELECT
+  n.*,
+  MAX(
+    CASE
+      WHEN nc.channeltype = 'Email' THEN nc.status
+    END
+  ) AS Email,
+  MAX(
+    CASE
+      WHEN nc.channeltype = 'SMS' THEN nc.status
+    END
+  ) AS SMS,
+  MAX(
+    CASE
+      WHEN nc.channeltype = 'Slack' THEN nc.status
+    END
+  ) AS Slack,
+  MAX(
+    CASE
+      WHEN nc.channeltype = 'Push' THEN nc.status
+    END
+  ) AS Push
+FROM
+  notification n
+  LEFT JOIN notificationchannel nc ON n.id = nc.notificationId
+GROUP BY
+  n.id;
+
+```  
 
 ## System Overview
 The system is designed to handle a large number of notifications across multiple channels. It is built with scalability and reliability in mind. The current implementation supports SMS, EMail, Push Notification, and Slack. The MQTT functionality is a work in progress. Each individual notification service should have its own messaging queue, allowing us to increase or decrease the number of workers as per the load of the message queue.
