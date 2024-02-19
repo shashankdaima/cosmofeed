@@ -3,14 +3,13 @@
 
 This is a scalable MultiChannel Notification System that sends notifications to SMS, EMail, Push Notification, Slack, and MQTT. This is a hiring assignment for a Senior Software Engineer at Cosmofeed. The system is built with Express.js and TypeScript.
 > **Note:** The MQTT functionality is currently not working. We are actively working on fixing this issue. Thank you for your understanding.
+> **Push Notification Client**: Please download the apk attached `push-notification-client` folder
 
 ![Current System Design](media/current_system_design.png)
 
 ![System Design with Message Queues](media/system_design.png)
 
 https://github.com/shashankdaima/cosmofeed/assets/64317542/80ef2e50-1a44-40b3-a474-98c1cd625afc
-
-
 
 ## Tech Stack
 - Express.js (with Typescript)
@@ -22,9 +21,11 @@ https://github.com/shashankdaima/cosmofeed/assets/64317542/80ef2e50-1a44-40b3-a4
 
 ## Future Improvements
 - Fix the MQTT pipeline to enable MQTT functionality.
+- Writing Unit test with Jest.
 - Add a message queue to avoid data congestion.
 
 ## API Curl Definition
+> **Note:** This service is deployed on Render.com's free tier. Hence, initial request will take about a minute to spin up the server.  
 ```bash
 curl --location 'https://cosmofeed-trial.onrender.com/notification/dispatch' \
 --header 'Content-Type: application/json' \
