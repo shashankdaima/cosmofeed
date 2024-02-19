@@ -6,19 +6,20 @@ import { EmailNotificationDispatcherImplementation } from "./email_notification_
 import { MqttNotificationDispatcherImplementation } from "./mqtt_notification_dispatcher_impl.service";
 import { PushNotificationDispatcherImplementation } from "./push_notification_dispatcher_impl.service";
 import { SlackNotificationDispatcherImplementation } from "./slack_notification_dispatcher_impl.service";
+import { MonitoringService } from "../monitoring_service/monitoring.service";
 export class NotificationDispatcherImplementation implements NotificationDispatcherService{
-    async dispatch(notificationChannel: AllChannel, notification: Notification): Promise <Result<Boolean> >{
+    async dispatch(notificationChannel: AllChannel, notification: Notification, monitoringService:MonitoringService): Promise <Result<Boolean> >{
         const emailNotificationDispatcher=new EmailNotificationDispatcherImplementation();
         const pushNotificationDispatcher = new PushNotificationDispatcherImplementation();
         const smsNotificationDispatcher = new SmsNotificationDispatcherImplementation();
         const mqttNotificationDispatcher = new MqttNotificationDispatcherImplementation();
         const slackNotificationDispatcher = new SlackNotificationDispatcherImplementation();
 
-        const emailPromise = emailNotificationDispatcher.dispatch(notificationChannel.emailChannel, notification);
-        const pushPromise = pushNotificationDispatcher.dispatch(notificationChannel.pushChannel, notification);
-        const smsPromise = smsNotificationDispatcher.dispatch(notificationChannel.smsChannel, notification);
+        const emailPromise = emailNotificationDispatcher.dispatch(notificationChannel.emailChannel, notification, monitoringService);
+        const pushPromise = pushNotificationDispatcher.dispatch(notificationChannel.pushChannel, notification, monitoringService);
+        const smsPromise = smsNotificationDispatcher.dispatch(notificationChannel.smsChannel, notification, monitoringService);
         // const mqttPromise = mqttNotificationDispatcher.dispatch(notificationChannel.mqttChannel, notification);
-        const slackPromise = slackNotificationDispatcher.dispatch(notificationChannel.slackChannel, notification);
+        const slackPromise = slackNotificationDispatcher.dispatch(notificationChannel.slackChannel, notification, monitoringService);
 
         const [emailResult, pushResult, smsResult,  slackResult] = await Promise.all([emailPromise, pushPromise, smsPromise,slackPromise]);
 

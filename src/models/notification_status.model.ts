@@ -1,12 +1,11 @@
 export class NotificationStatus {
-    id: string;
-    notificationId: string;
+
+    notificationId: number;
     deliveryStatus: 'pending' | 'delivered' | 'failed';
     error: string | undefined;
     channelType:string;
  
-    constructor(id: string, notificationId: string, deliveryStatus: 'pending' | 'delivered' | 'failed', error: string | undefined, channelType: string) {
-        this.id = id;
+    constructor(notificationId: number, deliveryStatus: 'pending' | 'delivered' | 'failed', error: string | undefined, channelType: string) {
         this.notificationId = notificationId;
         this.deliveryStatus = deliveryStatus;
         this.error = error;

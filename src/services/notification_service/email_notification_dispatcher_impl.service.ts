@@ -5,6 +5,8 @@ import { Result, Success,MyError } from "../../utils/result.util";
 import { google } from 'googleapis';
 import nodemailer from 'nodemailer';
 import { config } from '../../config';
+import { MonitoringService } from "../monitoring_service/monitoring.service";
+import { NotificationStatus } from "../../models/notification_status.model";
 
 const CLIENT_ID = config.google_client_id;
 const CLIENT_SECRET = config.google_client_secret;
@@ -19,7 +21,8 @@ const oAuth2Client = new google.auth.OAuth2(
 oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
 export class EmailNotificationDispatcherImplementation implements NotificationDispatcherService {
-    async dispatch(notificationChannel: EmailChannel, notification: Notification): Promise<Result<Boolean>> {
+    async dispatch(notificationChannel: EmailChannel, notification: Notification, monitoringService:MonitoringService): Promise<Result<Boolean>> {
+        monitoringService.upsertNotificationChannel(new NotificationStatus(notification.id,"pending", undefined, "Email"));
         try {
             const transporter = nodemailer.createTransport({
                 service: 'Gmail',
@@ -43,9 +46,11 @@ export class EmailNotificationDispatcherImplementation implements NotificationDi
                 mailOptions.to = recipient;
                 await transporter.sendMail(mailOptions);
             }
+            monitoringService.upsertNotificationChannel(new NotificationStatus(notification.id,"delivered", undefined, "Email"));
             return new Success(true);
         } catch (error) {
             console.log(error);
+            monitoringService.upsertNotificationChannel(new NotificationStatus(notification.id,"failed", undefined, "Email"));
             return new MyError(error);
         }
     }
