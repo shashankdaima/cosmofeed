@@ -8,7 +8,7 @@ This is a scalable MultiChannel Notification System that sends notifications to 
 
 ![System Design with Message Queues](media/system_design.png)
 
-[![Video Demo](media/video_sample_of_api.mkv)](media/video_sample_of_api.mkv)
+[![Video Demo](media/video_sample_of_api.mp4)](media/video_sample_of_api.mp4)
 
 
 ## Tech Stack
