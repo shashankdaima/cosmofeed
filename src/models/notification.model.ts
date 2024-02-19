@@ -1,14 +1,14 @@
 import { v4 as uuidv4 } from 'uuid';
-
+import moment from 'moment-timezone';
 export class Notification {
-  id: string;
+  id: number;
   message: string;
-  createdAt: Date;
+  createdAt: string;
 
   constructor(message: string) {
-    this.id = uuidv4();
+    this.id = 0;
     this.message = message;
-    this.createdAt = new Date();
+    this.createdAt =  moment().tz('Asia/Kolkata').format();
   }
 }
 

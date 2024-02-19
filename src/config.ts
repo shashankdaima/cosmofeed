@@ -13,5 +13,10 @@ export const config = {
   mqtt_uri:"mqtt://localhost:1883",
   google_credentials_path:process.env.GOOGLE_SERVICE_PATH, 
   firebase_project_id:'cosmofeed-86cf0',
-  google_email_host:process.env.GOOGLE_EMAIL_HOST
+  google_email_host:process.env.GOOGLE_EMAIL_HOST,
+  postgres_user:process.env.POSTGRES_USER,
+  postgres_host:process.env.POSTGRES_HOST,
+  postgres_db:process.env.POSTGRES_DB,
+  postgres_pwd:process.env.POSTGRES_PWD,
+  postgres_port:process.env.POSTGRES_PORT,
 };

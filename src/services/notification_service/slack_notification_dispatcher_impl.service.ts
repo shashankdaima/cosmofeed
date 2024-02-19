@@ -1,7 +1,7 @@
-import { config } from "../config";
-import { BaseChannel, SlackChannel } from "../models/channel.model";
-import { Notification } from "../models/notification.model";
-import { MyError, Result, Success } from "../utils/result.util";
+import { config } from "../../config";
+import { BaseChannel, SlackChannel } from "../../models/channel.model";
+import { Notification } from "../../models/notification.model";
+import { MyError, Result, Success } from "../../utils/result.util";
 import { NotificationDispatcherService } from "./notification_dispatcher.service";
 export class SlackNotificationDispatcherImplementation implements NotificationDispatcherService {
     async dispatch(notificationChannel: SlackChannel, notification: Notification): Promise<Result<Boolean>> {

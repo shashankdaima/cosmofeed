@@ -1,6 +1,6 @@
-import { BaseChannel, PushChannel } from "../models/channel.model";
-import { Notification } from "../models/notification.model";
-import { MyError, Result, Success } from "../utils/result.util";
+import { BaseChannel, PushChannel } from "../../models/channel.model";
+import { Notification } from "../../models/notification.model";
+import { MyError, Result, Success } from "../../utils/result.util";
 import { initializeApp, credential } from "firebase-admin";
 import { getMessaging } from "firebase-admin/messaging";
 import { NotificationDispatcherService } from "./notification_dispatcher.service";

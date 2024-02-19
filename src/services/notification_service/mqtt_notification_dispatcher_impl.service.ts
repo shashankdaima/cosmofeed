@@ -1,9 +1,9 @@
-import { BaseChannel, MQTTChannel } from "../models/channel.model";
-import { Notification } from "../models/notification.model";
+import { BaseChannel, MQTTChannel } from "../../models/channel.model";
+import { Notification } from "../../models/notification.model";
 import mqtt from "mqtt";
-import { Result, Success, MyError } from "../utils/result.util";
+import { Result, Success, MyError } from "../../utils/result.util";
 import { NotificationDispatcherService } from "./notification_dispatcher.service";
-import { config } from "../config";
+import { config } from "../../config";
 const protocol = 'mqtt'
 const host = 'broker.emqx.io'
 const port = '1883'
