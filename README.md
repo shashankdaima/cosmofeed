@@ -8,7 +8,8 @@ This is a scalable MultiChannel Notification System that sends notifications to 
 
 ![System Design with Message Queues](media/system_design.png)
 
-[![Video Demo](media/video_sample_of_api.mp4)](media/video_sample_of_api.mp4)
+https://github.com/shashankdaima/cosmofeed/assets/64317542/80ef2e50-1a44-40b3-a474-98c1cd625afc
+
 
 
 ## Tech Stack
