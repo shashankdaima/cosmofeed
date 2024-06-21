@@ -115,6 +115,3 @@ The system is designed to handle a large number of notifications across multiple
 ## What's Next?
 The first priority is to fix the MQTT pipeline and enable MQTT functionality. This will allow the system to support real-time messaging over MQTT. Additionally, the system can be further improved by adding a message queue. This will ensure that no notifications are lost, even during high traffic periods.
 
-## Thank You
-Thank you for considering this assignment. I look forward to discussing the system in more detail.
-
