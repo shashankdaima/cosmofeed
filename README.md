@@ -1,7 +1,7 @@
 # MultiChannel Notification System
 
 
-This is a scalable MultiChannel Notification System that sends notifications to SMS, EMail, Push Notification, Slack, and MQTT. This is a hiring assignment for a Senior Software Engineer at Cosmofeed. The system is built with Express.js and TypeScript.
+This is a scalable MultiChannel Notification System that sends notifications to SMS, EMail, Push Notification, Slack, and MQTT. The system is built with Express.js and TypeScript.
 > **Note:** The MQTT functionality is currently not working. We are actively working on fixing this issue. Thank you for your understanding.
 > **Push Notification Client**: Please download the apk attached `push-notification-client` folder
 
